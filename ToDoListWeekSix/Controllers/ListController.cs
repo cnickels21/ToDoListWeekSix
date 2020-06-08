@@ -12,7 +12,7 @@ namespace ToDoListWeekSix.Controllers
     [ApiController]
     public class ListController : Controller
     {
-        IListRepository listRepository;
+        private readonly IListRepository listRepository;
 
         public ListController(IListRepository listRepository)
         {
