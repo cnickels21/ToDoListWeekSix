@@ -15,7 +15,12 @@ namespace ToDoListWeekSix.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            // Seed list data to check Get routes
+            modelBuilder.Entity<List>()
+                .HasData(
+                new { Id = 1, Task = "Start up injection", DueDate = DateTime.Now, Assignee = "Chase" },
+                new { Id = 2, Task = "Routing", DueDate = DateTime.Now, Assignee = "Chase" }
+                );
         }
 
         DbSet<List> Lists { get; set; }
