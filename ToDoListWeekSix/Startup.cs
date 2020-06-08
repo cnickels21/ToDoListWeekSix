@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ToDoListWeekSix.Data;
+using ToDoListWeekSix.Data.IInjection;
+using ToDoListWeekSix.Data.Repositories;
 
 namespace ToDoListWeekSix
 {
@@ -36,6 +38,8 @@ namespace ToDoListWeekSix
             {
                 options.UseSqlServer(Configuration.GetConnectionString("UsersConnection"));
             });
+
+            services.AddTransient<IListRepository, DatabaseListRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
