@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ToDoListWeekSix.Data.IInjection
 {
-    interface IListRepository
+    public interface IListRepository
     {
     }
 }
