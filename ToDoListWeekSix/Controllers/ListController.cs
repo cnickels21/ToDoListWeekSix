@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ToDoListWeekSix.Data.IInjection;
+using ToDoListWeekSix.Models.DTOs;
 
 namespace ToDoListWeekSix.Controllers
 {
@@ -18,9 +19,10 @@ namespace ToDoListWeekSix.Controllers
             this.listRepository = listRepository;
         }
 
-        public IActionResult Index()
+        public async Task<ActionResult<ListDTO>> Index()
         {
-            return View();
+            var list = await listRepository.GetEntireList();
+            return View(list);
         }
     }
 }
