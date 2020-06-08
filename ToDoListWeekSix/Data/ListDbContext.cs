@@ -23,6 +23,6 @@ namespace ToDoListWeekSix.Data
                 );
         }
 
-        DbSet<List> Lists { get; set; }
+        public DbSet<List> Lists { get; set; }
     }
 }

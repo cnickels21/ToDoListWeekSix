@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,19 @@ namespace ToDoListWeekSix.Data.Repositories
             _context = context;
         }
 
-        public Task<IEnumerable<ListDTO>> GetEntireList()
+        public async Task<IEnumerable<ListDTO>> GetEntireList()
         {
-            throw new NotImplementedException();
+            var list = await _context.Lists
+                .Select(list => new ListDTO
+                {
+                    Id = list.Id,
+                    Task = list.Task,
+                    DueDate = list.DueDate,
+                    Assignee = list.Assignee,
+                })
+                .ToListAsync();
+
+            return list;
         }
     }
 }

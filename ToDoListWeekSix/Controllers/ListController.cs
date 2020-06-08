@@ -22,6 +22,7 @@ namespace ToDoListWeekSix.Controllers
         public async Task<ActionResult<ListDTO>> Index()
         {
             var list = await listRepository.GetEntireList();
+            // return list;
             return View(list);
         }
     }
