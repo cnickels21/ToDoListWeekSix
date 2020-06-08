@@ -19,11 +19,10 @@ namespace ToDoListWeekSix.Controllers
             this.listRepository = listRepository;
         }
 
-        public async Task<ActionResult<ListDTO>> Index()
+        [HttpGet]
+        public async Task<ActionResult<ListDTO>> GetList()
         {
-            var list = await listRepository.GetEntireList();
-            // return list;
-            return View(list);
+            return Ok(await listRepository.GetEntireList());
         }
     }
 }
