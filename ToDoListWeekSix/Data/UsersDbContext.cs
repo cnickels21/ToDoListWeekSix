@@ -14,5 +14,16 @@ namespace ToDoListWeekSix.Data
         public UsersDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            var admin = new IdentityRole { Id = "admin", Name = "administrator" };
+            var user = new IdentityRole { Id = "user", Name = "user" };
+
+            builder.Entity<IdentityRole>()
+                .HasData(admin, user);
+        }
     }
 }
