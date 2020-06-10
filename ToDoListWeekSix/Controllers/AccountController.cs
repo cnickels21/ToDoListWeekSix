@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -122,6 +123,32 @@ namespace ToDoListWeekSix.Controllers
                 user.FirstName,
                 user.LastName,
             });
+        }
+
+        [Authorize]
+        [HttpGet("Self")]
+        public async Task<IActionResult> Self()
+        {
+            if (HttpContext.User.Identity is ClaimsIdentity identity)
+            {
+                var userClaim = identity.FindFirst("UserId");
+                var userId = userClaim.Value;
+
+                var user = await userManager.FindByIdAsync(userId);
+
+                if (user == null)
+                    return Unauthorized();
+
+                return Ok(new
+                {
+                    UserId = user.Id,
+                    user.Email,
+                    user.FirstName,
+                    user.LastName,
+                });
+            }
+
+            return Unauthorized();
         }
 
         public string CreateToken(ToDoUser user)
