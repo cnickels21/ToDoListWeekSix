@@ -7,6 +7,7 @@ using ToDoListWeekSix.Data.IInjection;
 using ToDoListWeekSix.Models.DTOs;
 using ToDoListWeekSix.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToDoListWeekSix.Controllers
 {
@@ -33,6 +34,7 @@ namespace ToDoListWeekSix.Controllers
             return await listRepository.GetOneListItem(id);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] List list)
         {
