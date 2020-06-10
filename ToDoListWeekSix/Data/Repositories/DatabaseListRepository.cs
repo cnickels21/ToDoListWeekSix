@@ -18,7 +18,7 @@ namespace ToDoListWeekSix.Data.Repositories
         public DatabaseListRepository(ListDbContext context, UserManager<ToDoUser> userManager)
         {
             _context = context;
-            this.userManager = userManager;S
+            this.userManager = userManager;
         }
 
         public async Task<IEnumerable<ListDTO>> GetEntireList()
@@ -52,6 +52,13 @@ namespace ToDoListWeekSix.Data.Repositories
                 Task = listItem.Task,
                 CreatedBy = user == null ? null : $"{user.FirstName} {user.LastName}",
             };
+        }
+
+        public async Task DeleteListItem(int id)
+        {
+            var listItem = await _context.Lists.FindAsync(id);
+            _context.Entry(listItem).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
 

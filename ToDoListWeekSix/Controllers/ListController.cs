@@ -31,5 +31,11 @@ namespace ToDoListWeekSix.Controllers
         {
             return await listRepository.GetOneListItem(id);
         }
+
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await listRepository.DeleteListItem(id);
+        }
     }
 }

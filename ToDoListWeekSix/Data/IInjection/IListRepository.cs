@@ -10,5 +10,6 @@ namespace ToDoListWeekSix.Data.IInjection
     {
         Task<IEnumerable<ListDTO>> GetEntireList();
         Task<ListDTO> GetOneListItem(int id);
+        Task DeleteListItem(int id);
     }
 }
