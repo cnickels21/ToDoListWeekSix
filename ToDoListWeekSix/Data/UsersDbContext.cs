@@ -19,8 +19,16 @@ namespace ToDoListWeekSix.Data
         {
             base.OnModelCreating(builder);
 
-            var admin = new IdentityRole { Id = "admin", Name = "administrator" };
-            var user = new IdentityRole { Id = "user", Name = "user" };
+            var admin = new IdentityRole { 
+                Id = "admin", 
+                Name = "administrator", 
+                ConcurrencyStamp = "f7d11de5-b398-4434-a6b9-c117781c2985",
+            };
+            var user = new IdentityRole { 
+                Id = "user", 
+                Name = "user", 
+                ConcurrencyStamp = "6f454848-0477-4dd3-848c-72f51f6f2ab9",
+            };
 
             builder.Entity<IdentityRole>()
                 .HasData(admin, user);
