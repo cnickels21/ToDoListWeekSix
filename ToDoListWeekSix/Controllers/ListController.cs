@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ToDoListWeekSix.Data.IInjection;
 using ToDoListWeekSix.Models.DTOs;
+using Task = ToDoListWeekSix.Models;
 
 namespace ToDoListWeekSix.Controllers
 {
