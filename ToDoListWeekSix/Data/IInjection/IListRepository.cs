@@ -9,5 +9,6 @@ namespace ToDoListWeekSix.Data.IInjection
     public interface IListRepository
     {
         Task<IEnumerable<ListDTO>> GetEntireList();
+        Task<ListDTO> GetOneListItem(int id);
     }
 }
