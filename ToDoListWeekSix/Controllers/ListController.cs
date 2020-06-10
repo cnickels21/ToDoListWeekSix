@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ToDoListWeekSix.Data.IInjection;
 using ToDoListWeekSix.Models.DTOs;
 using ToDoListWeekSix.Models;
+using System.Security.Claims;
 
 namespace ToDoListWeekSix.Controllers
 {
@@ -44,5 +45,15 @@ namespace ToDoListWeekSix.Controllers
         {
             await listRepository.DeleteListItem(id);
         }
+
+
+
+        private string GetUserId()
+        {
+            return ((ClaimsIdentity)User.Identity).FindFirst("UserId")?.Value;
+        }
+
+
+
     }
 }
