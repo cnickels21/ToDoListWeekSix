@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using ToDoListWeekSix.Data;
 using ToDoListWeekSix.Data.IInjection;
 using ToDoListWeekSix.Data.Repositories;
+using ToDoListWeekSix.Models;
 
 namespace ToDoListWeekSix
 {
@@ -38,6 +40,9 @@ namespace ToDoListWeekSix
             {
                 options.UseSqlServer(Configuration.GetConnectionString("UsersConnection"));
             });
+
+            services.AddIdentity<ToDoUser, IdentityRole>()
+                .AddEntityFrameworkStores<UsersDbContext>();
 
             services.AddTransient<IListRepository, DatabaseListRepository>();
         }
