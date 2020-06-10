@@ -26,6 +26,7 @@ namespace ToDoListWeekSix.Data.Repositories
                     Task = list.Task,
                     DueDate = list.DueDate,
                     Assignee = list.Assignee,
+                    CreatedBy = list.CreatedByUserID,
                 })
                 .ToListAsync();
 
