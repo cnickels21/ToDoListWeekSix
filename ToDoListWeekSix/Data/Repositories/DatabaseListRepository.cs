@@ -54,6 +54,17 @@ namespace ToDoListWeekSix.Data.Repositories
             };
         }
 
+        public async Task<List> UpdateList(List list, int id)
+        {
+            if (list.Id == id)
+            {
+                _context.Entry(list).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
+            return list;
+        }
+
         public async Task DeleteListItem(int id)
         {
             var listItem = await _context.Lists.FindAsync(id);
@@ -61,7 +72,6 @@ namespace ToDoListWeekSix.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-
-
+        
     }
 }

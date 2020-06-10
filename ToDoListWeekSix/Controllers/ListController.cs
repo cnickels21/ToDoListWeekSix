@@ -32,6 +32,13 @@ namespace ToDoListWeekSix.Controllers
             return await listRepository.GetOneListItem(id);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] List list)
+        {
+            await listRepository.UpdateList(list, id);
+            return Ok("Complete");
+        }
+
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
