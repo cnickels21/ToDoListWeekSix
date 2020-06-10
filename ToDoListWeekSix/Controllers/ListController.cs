@@ -57,6 +57,13 @@ namespace ToDoListWeekSix.Controllers
             return Ok("Complete");
         }
 
+        [Authorize]
+        [HttpGet("{MyList}")]
+        public async Task<IEnumerable<ListDTO>> GetMyList()
+        {
+            return await listRepository.GetMyList(GetUserId());
+        }
+
         private string GetUserId()
         {
             return ((ClaimsIdentity)User.Identity).FindFirst("UserId")?.Value;

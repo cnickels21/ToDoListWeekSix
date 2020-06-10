@@ -30,7 +30,6 @@ namespace ToDoListWeekSix.Data.Repositories
                     Task = list.Task,
                     DueDate = list.DueDate,
                     Assignee = list.Assignee,
-                    CreatedBy = list.CreatedByUserID,
                 })
                 .ToListAsync();
 
@@ -76,6 +75,20 @@ namespace ToDoListWeekSix.Data.Repositories
         {
             _context.Entry(list).State = EntityState.Added;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ListDTO>> GetMyList(string userId)
+        {
+            return await _context.Lists
+                .Where(list => list.CreatedByUserID != null && list.CreatedByUserID == userId)
+                .Select(list => new ListDTO
+                {
+                    Id = list.Id,
+                    Task = list.Task,
+                    DueDate = list.DueDate,
+                    Assignee = list.Assignee,
+                })
+                .ToListAsync();
         }
     }
 }

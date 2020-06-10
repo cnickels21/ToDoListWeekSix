@@ -14,5 +14,6 @@ namespace ToDoListWeekSix.Data.IInjection
         Task<List> UpdateList(List list, int id);
         Task DeleteListItem(int id);
         Task CreateListItem(List list);
+        Task<IEnumerable<ListDTO>> GetMyList(string userId);
     }
 }
