@@ -48,7 +48,14 @@ namespace ToDoListWeekSix.Controllers
             await listRepository.DeleteListItem(id);
         }
 
-
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateListItem([FromBody] List list)
+        {
+            list.CreatedByUserID = GetUserId();
+            await listRepository.CreateListItem(list);
+            return Ok("Complete");
+        }
 
         private string GetUserId()
         {

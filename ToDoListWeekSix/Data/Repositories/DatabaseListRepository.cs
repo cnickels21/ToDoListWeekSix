@@ -72,6 +72,10 @@ namespace ToDoListWeekSix.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        
+        public async Task CreateListItem(List list)
+        {
+            _context.Entry(list).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
     }
 }
