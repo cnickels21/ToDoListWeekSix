@@ -11,5 +11,6 @@ namespace ToDoListWeekSix.Models
         public string Task { get; set; }
         public DateTime DueDate { get; set; }
         public string Assignee { get; set; }
+        public string CreatedByUserID { get; set; }
     }
 }

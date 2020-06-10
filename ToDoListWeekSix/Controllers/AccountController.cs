@@ -139,6 +139,7 @@ namespace ToDoListWeekSix.Controllers
 
             var token = new JwtSecurityToken(
                 claims: tokenClaims,
+                expires: DateTime.UtcNow.AddHours(5),
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
                 );
 
