@@ -28,7 +28,7 @@ namespace ToDoListWeekSix.Controllers
             return Ok(await listRepository.GetEntireList());
         }
 
-        // This route contradicts the "MyList" route....
+        // Route constraint to define difference in end point between authorized get route
         [HttpGet("{id:int}")]
         public async Task<ListDTO> GetListItem(int id)
         {
