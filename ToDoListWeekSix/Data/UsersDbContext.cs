@@ -21,12 +21,14 @@ namespace ToDoListWeekSix.Data
 
             var admin = new IdentityRole { 
                 Id = "admin", 
-                Name = "administrator", 
+                Name = "administrator",
+                NormalizedName = "ADMINISTRATOR",
                 ConcurrencyStamp = "f7d11de5-b398-4434-a6b9-c117781c2985",
             };
             var user = new IdentityRole { 
                 Id = "user", 
                 Name = "user", 
+                NormalizedName = "USER",
                 ConcurrencyStamp = "6f454848-0477-4dd3-848c-72f51f6f2ab9",
             };
 
