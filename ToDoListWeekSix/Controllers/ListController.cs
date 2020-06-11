@@ -29,11 +29,11 @@ namespace ToDoListWeekSix.Controllers
         }
 
         // This route contradicts the "MyList" route....
-        //[HttpGet("{id}")]
-        //public async Task<ListDTO> GetListItem(int id)
-        //{
-        //    return await listRepository.GetOneListItem(id);
-        //}
+        [HttpGet("{id:int}")]
+        public async Task<ListDTO> GetListItem(int id)
+        {
+            return await listRepository.GetOneListItem(id);
+        }
 
         [Authorize]
         [HttpPut("{id}")]
