@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ToDoListWeekSix.Models.DTOs
 {
@@ -11,5 +8,6 @@ namespace ToDoListWeekSix.Models.DTOs
         public string Task { get; set; }
         public DateTime DueDate { get; set; }
         public string Assignee { get; set; }
+        public string CreatedBy { get; set; }
     }
 }
