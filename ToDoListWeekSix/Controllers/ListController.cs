@@ -28,8 +28,15 @@ namespace ToDoListWeekSix.Controllers
             return Ok(await listRepository.GetEntireList());
         }
 
+        [Authorize]
+        [HttpGet("MyList")]
+        public async Task<IEnumerable<ListDTO>> GetMyList()
+        {
+            return await listRepository.GetMyList(GetUserId());
+        }
+
         // Route constraint to define difference in end point between authorized get route
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public async Task<ListDTO> GetListItem(int id)
         {
             return await listRepository.GetOneListItem(id);
@@ -44,25 +51,19 @@ namespace ToDoListWeekSix.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "administrator")]
         public async Task Delete(int id)
         {
             await listRepository.DeleteListItem(id);
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize(Policy = "lists.create")]
         public async Task<IActionResult> CreateListItem([FromBody] List list)
         {
             list.CreatedByUserID = GetUserId();
             await listRepository.CreateListItem(list);
             return Ok("Complete");
-        }
-
-        [Authorize]
-        [HttpGet("{MyList}")]
-        public async Task<IEnumerable<ListDTO>> GetMyList()
-        {
-            return await listRepository.GetMyList(GetUserId());
         }
 
         private string GetUserId()

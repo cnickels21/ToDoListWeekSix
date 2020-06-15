@@ -22,9 +22,12 @@ namespace ToDoListWeekSix.Controllers
     {
         private readonly UserManager<ToDoUser> userManager;
         private readonly IConfiguration configuration;
-        public AccountController(UserManager<ToDoUser> userManager, IConfiguration configuration)
+        public SignInManager<ToDoUser> SignInManager { get; }
+
+        public AccountController(UserManager<ToDoUser> userManager, SignInManager<ToDoUser> signInManager, IConfiguration configuration)
         {
             this.userManager = userManager;
+            this.SignInManager = signInManager;
             this.configuration = configuration;
         }
 
@@ -66,7 +69,7 @@ namespace ToDoListWeekSix.Controllers
             return Ok(new UserWithToken
             {
                 UserId = user.Id,
-                Token = CreateToken(user)
+                Token = await CreateToken(user)
             });
         }
 
@@ -83,7 +86,7 @@ namespace ToDoListWeekSix.Controllers
                     return Ok(new UserWithToken
                     {
                         UserId = user.Id,
-                        Token = CreateToken(user)
+                        Token = await CreateToken(user)
                     });
                 }
 
@@ -151,21 +154,24 @@ namespace ToDoListWeekSix.Controllers
             return Unauthorized();
         }
 
-        public string CreateToken(ToDoUser user)
+        public async Task<string> CreateToken(ToDoUser user)
         {
             var secret = configuration["JWT:Secret"];
             var secretBytes = Encoding.UTF8.GetBytes(secret);
             var signingKey = new SymmetricSecurityKey(secretBytes);
 
-            var tokenClaims = new[]
+            var principal = await SignInManager.CreateUserPrincipalAsync(user);
+            var identity = (ClaimsIdentity)principal.Identity;
+
+            identity.AddClaims(new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim("UserId", user.Id),
                 new Claim("FullName", $"{user.FirstName} {user.LastName}")
-            };
+            });
 
             var token = new JwtSecurityToken(
-                claims: tokenClaims,
+                claims: identity.Claims,
                 expires: DateTime.UtcNow.AddHours(5),
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
                 );
