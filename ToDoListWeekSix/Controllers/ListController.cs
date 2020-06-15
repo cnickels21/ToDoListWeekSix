@@ -51,7 +51,7 @@ namespace ToDoListWeekSix.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "administrator")]
         public async Task Delete(int id)
         {
             await listRepository.DeleteListItem(id);
