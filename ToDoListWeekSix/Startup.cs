@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ToDoListWeekSix.Data;
 using ToDoListWeekSix.Data.IInjection;
@@ -71,6 +72,14 @@ namespace ToDoListWeekSix
                         ValidateAudience = false,
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("lists.create",
+                    policy => policy.RequireClaim("permissions", "create"));
+                options.AddPolicy("lists.delete",
+                    policy => policy.RequireClaim("permissions", "delete"));
+            });
 
             services.AddTransient<IListRepository, DatabaseListRepository>();
         }
