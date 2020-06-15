@@ -34,6 +34,13 @@ namespace ToDoListWeekSix.Data
 
             builder.Entity<IdentityRole>()
                 .HasData(admin, user);
+
+            builder.Entity<IdentityRoleClaim<string>>()
+                .HasData(
+                    new IdentityRoleClaim<string> { Id = 1, RoleId = "admin", ClaimType = "Permissions", ClaimValue = "create" },
+                    new IdentityRoleClaim<string> { Id = 2, RoleId = "admin", ClaimType = "Permissions", ClaimValue = "delete" },
+                    new IdentityRoleClaim<string> { Id = 4, RoleId = "user", ClaimType = "Permissions", ClaimValue = "create" }
+                );
         }
     }
 }
