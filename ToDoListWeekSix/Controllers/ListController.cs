@@ -51,13 +51,14 @@ namespace ToDoListWeekSix.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task Delete(int id)
         {
             await listRepository.DeleteListItem(id);
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize(Policy = "lists.create")]
         public async Task<IActionResult> CreateListItem([FromBody] List list)
         {
             list.CreatedByUserID = GetUserId();
